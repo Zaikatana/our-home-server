@@ -16,7 +16,7 @@ jobs:
         run: |
           pkill -f ./our-home-server || echo "No existing process found"
       - name: Run
-        run: nohup ./our-home-server
+        run: nohup ./our-home-server & echo "Server restarted successfully"
         env:
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_HOST: ${{ secrets.DB_HOST }}
