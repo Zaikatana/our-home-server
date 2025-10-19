@@ -4,7 +4,7 @@ COPY . .
 RUN go get .
 RUN go build -o our-home-server .
 
-FROM alpine:latest
+FROM ubuntu:latest
 WORKDIR /app
 COPY --from=builder /app/our-home-server .
 EXPOSE 3001
