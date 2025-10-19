@@ -1,6 +1,6 @@
 on: push
 jobs:
-  build-and-run:
+  build:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v5
@@ -8,8 +8,15 @@ jobs:
         run: go get .
       - name: Build
         run: go build
+  run:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: Kill any running instances
+        run: |
+          pkill -f ./our-home-server || echo "No existing process found"
       - name: Run
-        run: ./our-home-server
+        run: nohup ./our-home-server
         env:
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_HOST: ${{ secrets.DB_HOST }}
