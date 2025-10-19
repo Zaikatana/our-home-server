@@ -14,5 +14,5 @@ func main() {
 	routers.InitItemsRouter(r)
 	routers.InitRoomsRouter(r)
 	routers.InitCommentsRouter(r)
-	r.Run("localhost:3001")
+	r.Run(":3001")
 }
