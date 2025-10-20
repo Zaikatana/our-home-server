@@ -12,10 +12,7 @@ func main() {
 	db.InitPostgresDb()
 
 	r := gin.Default()
-	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"*"},
-		AllowMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowHeaders: []string{"Content-Type"}}))
+	r.Use(cors.Default())
 	routers.InitItemsRouter(r)
 	routers.InitRoomsRouter(r)
 	routers.InitCommentsRouter(r)
