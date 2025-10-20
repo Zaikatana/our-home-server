@@ -6,22 +6,16 @@ import (
 
 	"our-home-server/db"
 	"our-home-server/routers"
-
-	"time"
 )
 
 func main() {
 	db.InitPostgresDb()
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowAllOrigins = true
+	corsConfig.AddAllowHeaders("Authorization")
 
 	r := gin.Default()
-	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"*"},
-		ExposeHeaders:    []string{"*"},
-		AllowCredentials: true,
-		AllowAllOrigins:  true,
-		MaxAge:           12 * time.Hour}))
+	r.Use(cors.New(corsConfig))
 	routers.InitItemsRouter(r)
 	routers.InitRoomsRouter(r)
 	routers.InitCommentsRouter(r)
