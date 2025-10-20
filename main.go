@@ -16,7 +16,8 @@ func main() {
 		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"*"},
 		AllowHeaders:     []string{"*"},
-		AllowCredentials: true}))
+		AllowCredentials: true,
+		AllowAllOrigins:  true}))
 	routers.InitItemsRouter(r)
 	routers.InitRoomsRouter(r)
 	routers.InitCommentsRouter(r)
