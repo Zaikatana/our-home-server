@@ -6,6 +6,8 @@ import (
 
 	"our-home-server/db"
 	"our-home-server/routers"
+
+	"time"
 )
 
 func main() {
@@ -14,10 +16,12 @@ func main() {
 	r := gin.Default()
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"*"},
+		ExposeHeaders:    []string{"*"},
 		AllowCredentials: true,
-		AllowAllOrigins:  true}))
+		AllowAllOrigins:  true,
+		MaxAge:           12 * time.Hour}))
 	routers.InitItemsRouter(r)
 	routers.InitRoomsRouter(r)
 	routers.InitCommentsRouter(r)
