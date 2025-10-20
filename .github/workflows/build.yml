@@ -22,7 +22,6 @@ jobs:
         run: |
           docker run -d \
             --name our-home-server \
-            --network our-home-network \
             -p 3001:3001 \
             -e DB_USER=$DB_USER \
             -e DB_PASSWORD=$DB_PASSWORD \
